@@ -11,8 +11,6 @@ import {
 } from 'recoil';
 import { BrowserRouter } from 'react-router-dom';
 
-console.log('rendering index.js')
-
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>

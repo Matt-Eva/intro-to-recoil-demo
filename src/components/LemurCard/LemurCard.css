@@ -1,0 +1,19 @@
+.lemur-card{
+    border: solid;
+    border-width: 1px;
+    border-color: hsl(0, 0%, 90%);
+    border-radius: 2px;
+    height: 255px;
+    box-shadow: 0px 0px 7px hsl(0, 0%, 70%);
+}
+
+.lemur-card__image{
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    margin: 10px;
+}
+
+.lemur-card h2{
+    margin: 5px 0px 0px 10px;
+}

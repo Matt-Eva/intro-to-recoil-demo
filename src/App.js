@@ -3,7 +3,7 @@ import Home from './pages/Home/Home';
 import './App.css';
 
 function App() {
-  console.log('rendering app')
+  // console.log('rendering app')
 
   return (
     <div className="App">
