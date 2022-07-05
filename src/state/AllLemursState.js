@@ -1,4 +1,5 @@
 import {atom, selector} from 'recoil'
+import { categoryState } from './CategoryState'
 import { searchState } from './SearchState'
 
 export const allLemursState = atom({
@@ -6,8 +7,8 @@ export const allLemursState = atom({
     default: []
 })
 
-export const lemursFilteredByNameState = selector({
-    key: 'filteredByNameState',
+const lemursByNameState = selector({
+    key: 'lemursByNameState',
     get: ({get}) =>{
         const allLemurs = get(allLemursState)
         const name = get(searchState)
@@ -21,9 +22,17 @@ export const lemursFilteredByNameState = selector({
     }
 })
 
-export const filteredLemursState = selector({
-    key: 'filteredLemursState',
+export const lemursByNameAndCatState = selector({
+    key: 'lemursByNameAndCatState',
     get: ({get}) =>{
-        const nameFilteredLemurs = get(lemursFilteredByNameState)
+        const lemursByName = get(lemursByNameState)
+        const category = get(categoryState)
+        return lemursByName.filter(lemur => {
+            if(category === 'All'){
+                return true
+            } else {
+                return lemur.sex === category
+            }
+        })
     }
 })
