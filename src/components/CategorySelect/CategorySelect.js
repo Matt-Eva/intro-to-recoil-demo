@@ -6,7 +6,7 @@ function CategorySelect() {
     const[category, setCategory] = useRecoilState(categoryState)
   return (
     <div>
-        <label>Filter By:</label>
+        <label>Filter By Sex:</label>
         <select value={category} onChange={(e)=>setCategory(e.target.value)}>
             <option value='All'>All</option>
             <option value='F'>Female</option>
