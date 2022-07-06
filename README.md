@@ -1,70 +1,20 @@
-# Getting Started with Create React App
+# Intro to Recoil
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This application serves and an example of how to use Recoil as a state management library in React. We cover some very basic examples, which may all you need to use, depending on how complex your state management needs to be. Recoil is a relatively new tool that serves as a state management library for React specifically (unlike tools like Redux, which can be used outside of React). Like React, it was originally developed by Facebook (now Meta), and is intended to be a more 'React-like' state management library.
 
-## Available Scripts
+Recoil is a great introduction to the concept of a 'state management' library due to its simplicity. It offers more functionality than the useContext hook (although it uses this hook under the hood) while requiring less setup than both the useContext hook and tools like Redux. I'd recommend playing around with useContext as well as Redux in addition to trying out Recoil, so you can understand the differences between these three tools and make your own educated decisions. 
 
-In the project directory, you can run:
+But, first and foremost, what is a 'state management library'?
 
-### `npm start`
+## State Management
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+If you've built any React apps of moderate size, you've probably experienced the frustration of `props-drilling`. Let's say you need to declare state in a certain parent component, but a component five or even ten steps down the component hierarchy needs to access and possibly even update this state. Hence, you have to pass your stateful variable and your callback function to update state as props all the way from the top component to the lower component. This can cause frustrating errors - (oops, I misspelled the prop name when I destructred it in this component) - which become more common and harder to track down as your app grows.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+This is where a state management library comes in. Using a state management library allows us to store the state of our application in a separate file and selectively import that state wherever it's needed. While this initially requires more work and setup and also requires us to keep track of more files, it ultimately becomes an invaluable organizational tool that keeps your components clean and legible and reduces the chance for typos. There are more benefits that can be gained from use a state management libary, but the benefits listed above are often merit enough, and will start to have more and more of an impact as your application grows.
 
-### `npm test`
+## Installing Recoil
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Getting started with Recoil is quite simple. You simply create your new react app by running `npx create-react-app my-app-name`, then run either `npm install recoil` or `yarn add recoil` depending on whether you use `npm` or `yarn`.
 
-### `npm run build`
+Once you run these commands, you should see `recoil` listed as a dependecy in your `package.json` file.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
