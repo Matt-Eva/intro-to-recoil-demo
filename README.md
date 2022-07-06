@@ -8,9 +8,9 @@ But, first and foremost, what is a 'state management library'?
 
 ## State Management
 
-If you've built any React apps of moderate size, you've probably experienced the frustration of `props-drilling`. Let's say you need to declare state in a certain parent component, but a component five or even ten steps down the component hierarchy needs to access and possibly even update this state. Hence, you have to pass your stateful variable and your callback function to update state as props all the way from the top component to the lower component. This can cause frustrating errors - (oops, I misspelled the prop name when I destructred it in this component) - which become more common and harder to track down as your app grows.
+If you've built any React apps of moderate size, you've probably experienced the frustration of `props-drilling`. Let's say you need to declare state in a certain parent component, but a component five or even ten steps down the component hierarchy needs to access and possibly even update this state. Hence, you have to pass your stateful variable and your callback function to update state as props all the way from the top component to the lower component. This is known as `props-drilling`, and can cause frustrating errors - (oops, I misspelled the prop name when I destructred it in this component) - which become more common and harder to track down as your app grows.
 
-This is where a state management library comes in. Using a state management library allows us to store the state of our application in a separate file and selectively import that state wherever it's needed. While this initially requires more work and setup and also requires us to keep track of more files, it ultimately becomes an invaluable organizational tool that keeps your components clean and legible and reduces the chance for typos. There are more benefits that can be gained from use a state management libary, but the benefits listed above are often merit enough, and will start to have more and more of an impact as your application grows.
+Which is where a state management library comes in. Using a state management library allows us to store the state of our application in a separate file and selectively import that state wherever it's needed. While this initially requires more work and setup and also requires us to keep track of more files, it ultimately becomes an invaluable organizational tool that keeps your components clean and legible and reduces the chance for typos and unpassed props. There are more benefits that can be gained from use a state management libary, but the benefits listed above are often merit enough, and will start to have more and more of an impact as your application grows.
 
 ## Installing Recoil
 
@@ -18,3 +18,10 @@ Getting started with Recoil is quite simple. You simply create your new react ap
 
 Once you run these commands, you should see `recoil` listed as a dependecy in your `package.json` file.
 
+## Using Recoil
+
+If you haven't already, fork, clone, and `npm install` this repository to view the source code and follow along in the code as we walk through the following examples.
+
+The two key Recoil concepts we'll be discussing are `atoms` and `selectors`. We'll discuss atoms first.
+
+### Atoms
