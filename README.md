@@ -20,8 +20,41 @@ Once you run these commands, you should see `recoil` listed as a dependecy in yo
 
 ## Using Recoil
 
-If you haven't already, fork, clone, and `npm install` this repository to view the source code and follow along in the code as we walk through the following examples.
+If you haven't already, fork, clone, and `npm install` this repository to view the source code and follow along in the code as we walk through the following examples. To mock the backend, you'll need to have `json-server` installed. If you have it installed, you can start it up by running `npm run server`. Then, run `npm start` in a new terminal to open up the application.
+
+Note: the frontend is set up to connect to the backend via `localhost:3000`. Be sure to run your backend "server" on this port.
 
 The two key Recoil concepts we'll be discussing are `atoms` and `selectors`. We'll discuss atoms first.
 
 ### Atoms
+
+Atoms are the most basic aspect of Recoil - if you wanted to, you could get by with only using atoms.
+
+We set up a new `atom` for a new piece of state we want to keep track of. The first step to creating an atom involves creating a file to store the atom in. I like to keep these types of files that store state in a separate folder called `state`, which is at the same level in our folder hiearchy as our `components` folder. In this example app, we have three files in our `state` folder - `AllLemursState.js`, `CategoryState.js`, and `SearchState.js`.
+
+To create a new atom within your new file, you first need to import your atom from recoil:
+
+```
+import {atom} from 'recoil'
+```
+
+Next, we'll need to create the atom (in other words, create our new piece of state). We can do so by writing the following:
+
+```
+export const newState = atom({
+  key: 'newState', //serves as a unique identifier with respect to other atoms/selectors
+  default: 'some value', // this is where you declare the initial value of your state variable
+})
+```
+
+Notice that we're exporting `newState` on the same line in which we're declaring it. We can also export it at the bottom of our file using the following syntax:
+
+```
+export {newState}
+```
+
+This syntax may be preferable if you're planning on creating multiple pieces of state in the same file that you want to export.
+
+And that's it! We've create a new piece of state - a new `atom`. Now let's look at how we can access and change this new state in our components.
+
+## Accessing and Changing State
