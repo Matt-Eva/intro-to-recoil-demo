@@ -1,6 +1,6 @@
 # Intro to Recoil
 
-This application serves and an example of how to use Recoil as a state management library in React. We cover some very basic examples, which may all you need to use, depending on how complex your state management needs to be. Recoil is a relatively new tool that serves as a state management library for React specifically (unlike tools like Redux, which can be used outside of React). Like React, it was originally developed by Facebook (now Meta), and is intended to be a more 'React-like' state management library.
+This application serves as an example of how to use Recoil as a state management library in React. We cover some very basic examples, which may all you need to use, depending on how complex your state management needs to be. Recoil is a relatively new tool that serves as a state management library for React specifically (unlike tools like Redux, which can be used outside of React). Like React, it was originally developed by Facebook (now Meta), and is intended to be a more 'React-like' state management library.
 
 Recoil is a great introduction to the concept of a 'state management' library due to its simplicity. It offers more functionality than the useContext hook (although it uses this hook under the hood) while requiring less setup than both the useContext hook and tools like Redux. I'd recommend playing around with useContext as well as Redux in addition to trying out Recoil, so you can understand the differences between these three tools and make your own educated decisions. 
 
