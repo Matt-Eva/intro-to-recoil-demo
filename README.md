@@ -170,5 +170,5 @@ allLemursState: is being used in the `Home` component to capture the value of al
 
 categoryState: is being used in the `CategorySelect` component to keep track of which category a user is selecting via the `select` html element.
 
-searchState: is being used int the `Search` component to keep track of what a user is typing into the `input` element, which is serving as our "searchbar".
+searchState: is being used in the `Search` component to keep track of what a user is typing into the `input` element, which is serving as our "searchbar".
 
