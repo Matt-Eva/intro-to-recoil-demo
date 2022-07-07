@@ -85,4 +85,81 @@ function MyComponent(){
 }
 ```
 
-The syntax for using this hook is basically the same as the syntax for the `useState
+The syntax for using this hook is basically the same as the syntax for the `useState` hook itself, except we use `useRecoilState` instead of `useState`, and we pass in the value of the state we imported rather than an initial state value (remember, we set the initial state in the atom via the `default` key).
+
+To update state, we just call our setState function we received from our useRecoilState hook - in this example, that would be `setNewState` - and pass in the value of whatever we want our state to be:
+
+```
+setNewState('some new value') // sets the value of `newState` to the string `'some new value'`.
+```
+
+This causes a component re-render just like the useState hook.
+
+## Just Accessing State
+
+What if we only want to access a state variable, and don't want to generate a setter function? Well, Recoil let's us do that using the `useRecoilValue` hook, which we use in place of the `useRecoilState` hook. This allows us to access just the value of a state variable that we can then use in our components.
+
+We'll still need to import the state we want, along with the `useRecoilValue` hook from Recoil:
+
+```
+import { newState } from '../../state/newState'
+import { useRecoilValue } from 'recoil'
+```
+
+Then, to use it in our component, we invoke the `useRecoilValue` hook and pass it our imported state (just as we did with the `useRecoilState` hook).
+
+```
+function MyOtherComponent(){
+  const newState = useRecoilValue(newState)
+  
+  return (
+    <div>My Other Component</div>
+  )
+}
+```
+
+Notice that we no longer have to use array destructuring when declaring our variable. Since useRecoilValue just extracts the value of the state, leaving out the state setter function, it directly returns that value instead of returning an array that contains that value, which means we can save it in a variable without using destructuring.
+
+The purpose of this hook will become clear when we talk about the next fundamental aspect of Recoil - selectors.
+
+## Selectors
+
+Selectors are like atoms in that they are also used to create state, but they have a significant difference. Selectors are used only to represent DERIVED state - that is, state whose value is dependent on other state. Derived state is never changed using a setState function - rather, whenever a piece of state that it depends upon changes, derived state's value will also change. Because we never call a setState function for a piece of derived state, we'll want to access derived state using the `useRecoilValue` hook, since that only returns the state value, without a corresponding setter function.
+
+Let's look at an example of derived state, and talk about selector syntax. Go ahead and open up the file `allLemursState.js` and view it in your text editor. Open up the files `categoryState.js` and `searchState.js` as well, since we'll be using state defined in those files here in `allLemursState.js`.
+
+Let's check out those import statements first:
+
+```
+import {atom, selector} from 'recoil'
+import { categoryState } from './categoryState'
+import { searchState } from './searchState'
+```
+
+Just as when we create an atom, we have to import `selector` from Recoil in order to create a new selector.
+
+Now let's examine the atom we're creating here in `allLemursState.js`, along with the atoms created in `categoryState` and `searchState`:
+
+allLemursState.js:
+```
+const allLemursState = atom({
+    key: 'allLemursState',
+    default: []
+})
+```
+
+categoryState.js
+```
+const categoryState = atom({
+    key: 'categoryState',
+    default: 'All'
+})
+```
+
+searchState.js
+```
+export const searchState = atom({
+    key:"searcState",
+    default: ''
+})
+```
