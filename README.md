@@ -159,7 +159,16 @@ const categoryState = atom({
 searchState.js
 ```
 export const searchState = atom({
-    key:"searcState",
+    key:"searchState",
     default: ''
 })
 ```
+
+Let's also track down where each piece of state declared in these atoms is being used in our application:
+
+allLemursState: is being used in the `Home` component to capture the value of all the lemur data we're requesting from our "backend" (really just our db.json file).
+
+categoryState: is being used in the `CategorySelect` component to keep track of which category a user is selecting via the `select` html element.
+
+searchState: is being used int the `Search` component to keep track of what a user is typing into the `input` element, which is serving as our "searchbar".
+
