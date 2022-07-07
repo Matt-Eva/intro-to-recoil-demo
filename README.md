@@ -30,9 +30,9 @@ The two key Recoil concepts we'll be discussing are `atoms` and `selectors`. We'
 
 Atoms are the most basic aspect of Recoil - if you wanted to, you could get by with only using atoms.
 
-We set up a new `atom` for a new piece of state we want to keep track of. The first step to creating an atom involves creating a file to store the atom in. I like to keep these types of files that store state in a separate folder called `state`, which is at the same level in our folder hiearchy as our `components` folder. In this example app, we have three files in our `state` folder - `AllLemursState.js`, `CategoryState.js`, and `SearchState.js`.
+We set up a new `atom` for a new piece of state. The first step to creating an atom and its corresponding state involves creating a file to store the atom in. I like to keep these types of files that store state in a separate folder called `state`, which is at the same level in our folder hiearchy as our `components` folder. In this example app, we have three files in our `state` folder - `allLemursState.js`, `categoryState.js`, and `searchState.js`. You can group related state files in their own folder within the `state` folder as well, which might be helpful if your application is using a lot of state (and therefore a lot of state files). However, I wouldn't recommend implementing folder nesting any deeper than this.
 
-To create a new atom within your new file, you first need to import your atom from recoil:
+To create a new atom within your new file (let's say our new file is named newState.js), you first need to import your atom from recoil:
 
 ```
 import {atom} from 'recoil'
@@ -58,3 +58,31 @@ This syntax may be preferable if you're planning on creating multiple pieces of 
 And that's it! We've create a new piece of state - a new `atom`. Now let's look at how we can access and change this new state in our components.
 
 ## Accessing and Changing State
+
+Recoil is a great state management library for developers who are already familiar with using React because it's designed to be "React like" in its syntax. This becomes clear when we start importing and manipulating state within components.
+
+First, we'll need to import the state itself into the component:
+
+```
+import { newState } from '../../state/newState'
+```
+
+We'll also need to import a hook from Recoil itself. In this case, we're going to be importing the `useRecoilState` hook:
+
+```
+import { useRecoilState } from 'recoil'
+```
+
+We can then use this hook in our component in a manner very similar to the `useState` hook itself:
+
+```
+function MyComponent(){
+  const [newState, setNewState] = useRecoilState(newState)
+  
+  return (
+    <div>MyComponent</div>
+  )
+}
+```
+
+The syntax for using this hook is basically the same as the syntax for the `useState
