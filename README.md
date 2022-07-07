@@ -1,6 +1,6 @@
 # Intro to Recoil
 
-This application serves as an example of how to use Recoil as a state management library in React. We cover some very basic examples, which may all you need to use, depending on how complex your state management needs to be. Recoil is a relatively new tool that serves as a state management library for React specifically (unlike tools like Redux, which can be used outside of React). Like React, it was originally developed by Facebook (now Meta), and is intended to be a more 'React-like' state management library.
+This application serves as an example of how to use Recoil as a state management library in React. We only cover some very basic examples, which may be all you need to use, depending on how complex your state management needs to be. Recoil is a relatively new tool that serves as a state management library for React specifically (unlike tools like Redux, which can be used outside of React). Like React, it was originally developed by Facebook (now Meta), and is intended to be a more 'React-like' state management library.
 
 Recoil is a great introduction to the concept of a 'state management' library due to its simplicity. It offers more functionality than the useContext hook (although it uses this hook under the hood) while requiring less setup than both the useContext hook and tools like Redux. I'd recommend playing around with useContext as well as Redux in addition to trying out Recoil, so you can understand the differences between these three tools and make your own educated decisions. 
 
@@ -8,19 +8,19 @@ But, first and foremost, what is a 'state management library'?
 
 ## State Management
 
-If you've built any React apps of moderate size, you've probably experienced the frustration of `props-drilling`. Let's say you need to declare state in a certain parent component, but a component five or even ten steps down the component hierarchy needs to access and possibly even update this state. Hence, you have to pass your stateful variable and your callback function to update state as props all the way from the top component to the lower component. This is known as `props-drilling`, and can cause frustrating errors - (oops, I misspelled the prop name when I destructred it in this component) - which become more common and harder to track down as your app grows.
+If you've built any React apps of moderate size, you've probably experienced the frustration of `props-drilling`. Let's say you need to declare state in a certain parent component, but a component five or even ten steps down the component hierarchy needs to access and possibly even update this state. Hence, you have to pass your stateful variable and your callback function to update state as props all the way from the top component to the lower component. This is known as `props-drilling`, and can cause frustrating errors - (oops, I misspelled the prop name when I destructured it in this component) - which become more common and harder to track down as your app grows.
 
-Which is where a state management library comes in. Using a state management library allows us to store the state of our application in a separate file and selectively import that state wherever it's needed. While this initially requires more work and setup and also requires us to keep track of more files, it ultimately becomes an invaluable organizational tool that keeps your components clean and legible and reduces the chance for typos and unpassed props. There are more benefits that can be gained from use a state management libary, but the benefits listed above are often merit enough, and will start to have more and more of an impact as your application grows.
+Which is where a state management library comes in. Using a state management library allows us to store the state of our application in a separate file and selectively import that state wherever it's needed. While this initially requires more work and setup (and also requires us to keep track of more files) it ultimately becomes an invaluable organizational tool that keeps your components clean and legible and reduces the chance for typos and unpassed props. There are more benefits that can be gained from use a state management libary, but the benefits listed above are often merit enough, and will start to have more and more of an impact as your application grows.
 
 ## Installing Recoil
 
-Getting started with Recoil is quite simple. You simply create your new react app by running `npx create-react-app my-app-name`, then run either `npm install recoil` or `yarn add recoil` depending on whether you use `npm` or `yarn`.
+Getting started with Recoil is pretty straightforward. You simply create your new react app by running `npx create-react-app my-app-name`, then run either `npm install recoil` or `yarn add recoil` depending on whether you use `npm` or `yarn`.
 
-Once you run these commands, you should see `recoil` listed as a dependecy in your `package.json` file.
+Once you run these commands, you should see `recoil` listed as a dependency in your `package.json` file.
 
 ## Using Recoil
 
-If you haven't already, fork, clone, and `npm install` this repository to view the source code and follow along in the code as we walk through the following examples. To mock the backend, you'll need to have `json-server` installed. If you have it installed, you can start it up by running `npm run server`. Then, run `npm start` in a new terminal to open up the application.
+If you haven't already done so, fork, clone, and `npm install` this repository to view the source code and follow along in the code as we walk through the following examples. To mock the backend, you'll need to have `json-server` installed. If you have it installed, you can start it up by running `npm run server`. Then, run `npm start` in a new terminal to open up the application.
 
 Note: the frontend is set up to connect to the backend via `localhost:3000`. Be sure to run your backend "server" on this port.
 
@@ -57,7 +57,7 @@ This syntax may be preferable if you're planning on creating multiple pieces of 
 
 And that's it! We've create a new piece of state - a new `atom`. Now let's look at how we can access and change this new state in our components.
 
-## Accessing and Changing State
+### Accessing and Changing State
 
 Recoil is a great state management library for developers who are already familiar with using React because it's designed to be "React like" in its syntax. This becomes clear when we start importing and manipulating state within components.
 
@@ -95,7 +95,7 @@ setNewState('some new value') // sets the value of `newState` to the string `'so
 
 This causes a component re-render just like the useState hook.
 
-## Just Accessing State
+### Just Accessing State
 
 What if we only want to access a state variable, and don't want to generate a setter function? Well, Recoil let's us do that using the `useRecoilValue` hook, which we use in place of the `useRecoilState` hook. This allows us to access just the value of a state variable that we can then use in our components.
 
@@ -122,7 +122,7 @@ Notice that we no longer have to use array destructuring when declaring our vari
 
 The purpose of this hook will become clear when we talk about the next fundamental aspect of Recoil - selectors.
 
-## Selectors
+### Selectors
 
 Selectors are like atoms in that they are also used to create state, but they have a significant difference. Selectors are used only to represent DERIVED state - that is, state whose value is dependent on other state. Derived state is never changed using a setState function - rather, whenever a piece of state that it depends upon changes, derived state's value will also change. Because we never call a setState function for a piece of derived state, we'll want to access derived state using the `useRecoilValue` hook, since that only returns the state value without a corresponding setter function.
 
