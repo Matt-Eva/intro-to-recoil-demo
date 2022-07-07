@@ -124,7 +124,7 @@ The purpose of this hook will become clear when we talk about the next fundament
 
 ## Selectors
 
-Selectors are like atoms in that they are also used to create state, but they have a significant difference. Selectors are used only to represent DERIVED state - that is, state whose value is dependent on other state. Derived state is never changed using a setState function - rather, whenever a piece of state that it depends upon changes, derived state's value will also change. Because we never call a setState function for a piece of derived state, we'll want to access derived state using the `useRecoilValue` hook, since that only returns the state value, without a corresponding setter function.
+Selectors are like atoms in that they are also used to create state, but they have a significant difference. Selectors are used only to represent DERIVED state - that is, state whose value is dependent on other state. Derived state is never changed using a setState function - rather, whenever a piece of state that it depends upon changes, derived state's value will also change. Because we never call a setState function for a piece of derived state, we'll want to access derived state using the `useRecoilValue` hook, since that only returns the state value without a corresponding setter function.
 
 Let's look at an example of derived state, and talk about selector syntax. Go ahead and open up the file `allLemursState.js` and view it in your text editor. Open up the files `categoryState.js` and `searchState.js` as well, since we'll be using state defined in those files here in `allLemursState.js`.
 
