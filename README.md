@@ -294,4 +294,53 @@ Then, once we've used the `get` function to capture these pieces of state and sa
 
 ### Deriving State from Derived State
 
-Derived state doesn't have to depend only on state declared using an atom - it can derive its value from other pieces of derived state. Let's take a look at the next piece of derived state we're declaring in our `allLemursState.js` file, `lemursByNameAndCatState`.
+Derived state doesn't have to depend only on state declared using an atom - it can derive its value from other pieces of derived state. Let's take a look at the next piece of derived state we're declaring in our `allLemursState.js` file, `lemursByNameAndCatState`:
+
+```
+const lemursByNameAndCatState = selector({
+  key: 'lemursByNameAndCatState',
+  get: ({get}) => {
+
+      const lemursByName = get(lemursByNameState)
+      const category = get(categoryState)
+
+      return lemursByName.filter(lemur => category === 'All' ? true : lemur.sex === category)
+  }
+
+})
+```
+
+In this example, you'll notice that one of the pieces of state we're `getting` is `lemursByNameState`, which is itself a piece of derived state. Once we've `gotten` it (and `categoryState`, which we're importing at the top of our file), we can now filter through this piece of state to get the lemurs whose `sex` key match the category contained in categoryState. We want to filter through `lemursByNameState` instead of `allLemursState` because we want both filters to apply. 
+
+We could have consolidated both filters into one piece of derived state, but this example splits it up into two pieces of derived state to illustrate that one piece of derived state can derive its value from another piece of derived state.
+
+## Accessing Derived State
+
+Great, now that we have this piece of derived state, let's access it in the appropriate component - `LemurContainer`. Because we're dealing with derived state, we don't need a setter function, which means we should use the `useRecoilValue` hook instead of the `useRecoilState` hook:
+
+```
+import React from 'react'
+import LemurCard from "../LemurCard/LemurCard"
+import { lemursByNameAndCatState } from '../../state/allLemursState'
+import { useRecoilValue } from 'recoil'
+import './LemurContainer.css'
+
+function LemurContainer() {
+
+  const filteredLemurs = useRecoilValue(lemursByNameAndCatState)
+
+  const lemurList = filteredLemurs.map(lemur => <LemurCard lemur={lemur} key={lemur.id}/>)
+  
+  return (
+    <div className='lemur-container'>{lemurList}</div>
+  )
+}
+
+export default LemurContainer
+```
+
+Once we've included this piece of state in our LemurContainer, we can map over it to generate the appropriate number of lemurs cards to display.
+
+## Conclusion
+
+That's it for this walkthrough! There's a lot more that Recoil can handle, so if you're interested in learning more, check out the Recoil <a href="https://recoiljs.org/">website</a> and <a href="https://recoiljs.org/docs/introduction/motivation">documention</a>.
