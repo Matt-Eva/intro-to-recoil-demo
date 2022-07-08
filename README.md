@@ -197,3 +197,58 @@ categoryState: is being used in the `CategorySelect` component to keep track of 
 
 searchState: is being used in the `Search` component to keep track of what a user is typing into the `input` element, which is serving as our "searchbar".
 
+
+Okay, we've identified these different pieces of state, what's controlling them, and what they're keeping track of - now how do I want to use them in conjunction with each other?
+
+Well, ideally, I'd like my display to change based on user interaction - whatever a user has typed into the `input` element connected to `searchState` and whatever a user has selected using the `select` element connected to `categoryState`. So, I want to filter through my `allLemursState` to choose which lemurs to display based upon the criteria I've been given by a user. Here's how we might accomplish this without using selectors (and derived state):
+
+```
+import React, {useEffect} from 'react'
+import { useRecoilState, useRecoilValue } from 'recoil'
+import { allLemursState } from "../../state/allLemursState"
+import { searchState } from '../../state/searchState'
+import { categoryState } from '../../state/categoryState'
+import LemurContainer from '../../components/LemurContainer/LemurContainer'
+import Search from '../../components/Search/Search'
+import CategorySelect from '../../components/CategorySelect/CategorySelect'
+import "./Home.css"
+
+function Home() {
+  const [allLemurs, setAllLemurs] = useRecoilState(allLemursState)
+  const search = useRecoilValue(searchState)
+  const category = useRecoilValue(categoryState)
+
+  const nameFilteredLemurs = allLemurs.filter(lemur => lemur.name.toLowerCase().includes(search.toLowerCase()))
+  
+  const nameAndSexFilteredLemurs = nameFilteredLemurs.filter(lemur => category === "All" ? true : lemur.sex === category)
+
+  useEffect(() =>{
+    fetch('http://localhost:3000/lemurs')
+    .then(r => r.json())
+    .then(data => {
+      setAllLemurs(data)
+    })
+  }, [])
+
+  return (
+    <div>
+      <div className='home__header'>
+        <Search />
+        <CategorySelect />
+      </div>
+        <LemurContainer lemurs={nameAndSexFilteredLemurs}/>
+    </div>
+  )
+}
+
+export default Home
+```
+Basically, I want whatever lemurs display by LemurContainer to have been filtered twice before being displayed - once by the search a user has typed in, again by the category a user has selected. I'm importing all my pieces of state into my `Home` component, using all three to generate my desired value, then passing down that filtered value down to LemurContainer as props so that LemurContainer can then use it to display the desired subset of lemurs.
+
+This works fine, but it adds extra code to our component. As applications grow, it's likely that you'll be generating more and more code that's responsible for more and more aspects of your application. Keeping all of that code in your components can make them long and difficult to read. So, instead of including this logic here, we can extrapolate it out into one of our state files and turn it into derived state.
+
+Why is this a good case for derived state? Well let's look at our two variables - `nameFilteredLemurs` and `nameAndSexFilteredLemurs`. There variables values are dictated by the values of other pieces of state - `nameFilteredLemurs` relies on `allLemursState` and `searchState`, while `nameAndSexFilteredLemurs` technically relies on `allLemursState`, `searchState`, and `categoryState` (since its value is derived by filtering through `nameFilteredLemurs`). 
+
+These variables values will change whenever any of these pieces of state change, but their values are never directly manipulated. Hence these variables can be considered stateful, in that they change whenever state changes, but only in a derivative manner - we never call a set state function on these variables directly, rather on other pieces of state whose updated values will then influence the values of these variables. This means that we can treat them as `derived state`.
+
+Which is where selectors come in
