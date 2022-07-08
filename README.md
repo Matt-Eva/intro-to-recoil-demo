@@ -115,7 +115,7 @@ The syntax for using this hook is basically the same as the syntax for the `useS
 To update state, we just call our setState function we received from our useRecoilState hook - in this example, that would be `setNewState` - and pass in the value of whatever we want our state to be:
 
 ```
-setNewState('some new value') // sets the value of `newState` to the string `'some new value'`.
+setNewState('some new value') // sets the value of `newState` to the string 'some new value'.
 ```
 
 This causes a component re-render just like the useState hook.
