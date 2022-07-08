@@ -18,15 +18,40 @@ Getting started with Recoil is pretty straightforward. You simply create your ne
 
 Once you run these commands, you should see `recoil` listed as a dependency in your `package.json` file.
 
-## Using Recoil
+## Setting up Recoil
 
 If you haven't already done so, fork, clone, and `npm install` this repository to view the source code and follow along in the code as we walk through the following examples. To mock the backend, you'll need to have `json-server` installed. If you have it installed, you can start it up by running `npm run server`. Then, run `npm start` in a new terminal to open up the application.
 
 Note: the frontend is set up to connect to the backend via `localhost:3000`. Be sure to run your backend "server" on this port.
 
-The two key Recoil concepts we'll be discussing are `atoms` and `selectors`. We'll discuss atoms first.
+Now, let's take a look at our `index.js` file in this application. In addition to install Recoil as a dependency, we're goint to need to do some basic setup within `index.js` so that we can use Recoil throughout our application.
 
-### Atoms
+If you look at the import statements in `index.js`, you'll notice that we're importing something called `RecoilRoot` from Recoil: 
+
+```
+import { RecoilRoot } from 'recoil'
+```
+
+We wrap our `<App />` component with this `RecoilRoot` here in `index.js`, which allows us to use Recoil functionality throughout our application. (This application also uses `BrowserRouter` from React-Router-Dom, which you may be familiar with already. The syntax for `RecoilRoot` and `BrowserRouter` are essentially the same.)
+
+Here's what that syntax would look like (if we were just using Recoil and not using BrowserRouter as well - also note that this is React 18 syntax, which may look slightly different than older versions of React).
+
+```
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(
+  <RecoilRoot>
+    <App />
+  </RecoilRoot>
+)
+```
+
+Your app may also start out with React.StrictMode included, which you can keep throughout the development process. It's not necessary to run Recoil, but it won't impact Recoil functionality if you do keep it in.
+
+## Recoil Basics 
+
+The two key Recoil concepts we'll be discussing in this reading are `atoms` and `selectors`. We'll discuss atoms first.
+
+## Atoms
 
 Atoms are the most basic aspect of Recoil - if you wanted to, you could get by with only using atoms.
 
@@ -57,7 +82,7 @@ This syntax may be preferable if you're planning on creating multiple pieces of 
 
 And that's it! We've create a new piece of state - a new `atom`. Now let's look at how we can access and change this new state in our components.
 
-### Accessing and Changing State
+## Accessing and Changing State
 
 Recoil is a great state management library for developers who are already familiar with using React because it's designed to be "React like" in its syntax. This becomes clear when we start importing and manipulating state within components.
 
@@ -95,7 +120,7 @@ setNewState('some new value') // sets the value of `newState` to the string `'so
 
 This causes a component re-render just like the useState hook.
 
-### Just Accessing State
+## Just Accessing State
 
 What if we only want to access a state variable, and don't want to generate a setter function? Well, Recoil let's us do that using the `useRecoilValue` hook, which we use in place of the `useRecoilState` hook. This allows us to access just the value of a state variable that we can then use in our components.
 
@@ -122,7 +147,7 @@ Notice that we no longer have to use array destructuring when declaring our vari
 
 The purpose of this hook will become clear when we talk about the next fundamental aspect of Recoil - selectors.
 
-### Selectors
+## Selectors
 
 Selectors are like atoms in that they are also used to create state, but they have a significant difference. Selectors are used only to represent DERIVED state - that is, state whose value is dependent on other state. Derived state is never changed using a setState function - rather, whenever a piece of state that it depends upon changes, derived state's value will also change. Because we never call a setState function for a piece of derived state, we'll want to access derived state using the `useRecoilValue` hook, since that only returns the state value without a corresponding setter function.
 
