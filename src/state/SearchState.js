@@ -1,6 +1,8 @@
 import {atom} from 'recoil'
 
-export const searchState = atom({
-    key:"searcState",
-    default: ''
+ const searchState = atom({
+    key: "searchState", // unique identifier
+    default: '', // initial state
 })
+
+export {searchState}

@@ -1,6 +1,6 @@
 import React from 'react'
 import './Search.css'
-import {searchState} from '../../state/SearchState'
+import {searchState} from '../../state/searchState'
 import {useRecoilState} from 'recoil'
 
 function Search() {

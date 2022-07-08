@@ -1,9 +1,10 @@
 import React from 'react'
-import {categoryState} from '../../state/CategoryState'
+import {categoryState} from '../../state/categoryState'
 import {useRecoilState} from 'recoil'
 
 function CategorySelect() {
-    const[category, setCategory] = useRecoilState(categoryState)
+    const [category, setCategory] = useRecoilState(categoryState)
+
   return (
     <div>
         <label>Filter By Sex:</label>
