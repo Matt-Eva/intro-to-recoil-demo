@@ -1,8 +1,8 @@
 # Intro to Recoil
 
-This application serves as an example of how to use Recoil as a state management library in React. We only cover some very basic examples, which may be all you need to use, depending on how complex your state management needs to be. Recoil is a relatively new tool that serves as a state management library for React specifically (unlike tools like Redux, which can be used outside of React). Like React, it was originally developed by Facebook (now Meta), and is intended to be a more 'React-like' state management library.
+This application serves as an example of how to use Recoil as a state management library in React. We only cover some very basic examples, which may be all you need to use depending on how complex your state management needs to be. Recoil is a relatively new tool that serves as a state management library for React specifically (unlike tools like Redux, which can be used outside of React). Like React, it was originally developed by Facebook (now Meta), and is intended to be a more 'React-like' state management library.
 
-Recoil is a great introduction to the concept of a 'state management' library due to its simplicity. It offers more functionality than the useContext hook (although it uses this hook under the hood) while requiring less setup than both the useContext hook and tools like Redux. I'd recommend playing around with useContext as well as Redux in addition to trying out Recoil, so you can understand the differences between these three tools and make your own educated decisions. 
+Recoil is a great introduction to the concept of a 'state management' library due to its simplicity. It offers more functionality than the useContext hook (although it does use this hook under the hood) while requiring less setup than both the useContext hook and tools like Redux. I'd recommend playing around with useContext as well as Redux in addition to trying out Recoil. That way you can understand the differences between these three tools and make your own educated decisions. 
 
 But, first and foremost, what is a 'state management library'?
 
@@ -264,3 +264,34 @@ const newDerivedState = selector ({
 ```
 
 While there is some new, unfamiliar syntax here, by and large this is very similar to how we create atoms. The only difference is that instead of setting initial state using the `default` key, we use the `get` key to reference a function that dicates what value this piece of derived state will have. We'll use the `get` method from Recoil inside this function to access other pieces of state that we want our derived state to depend up.
+
+Let's take a look at how this is actually being implemented in our `allLemursState.js` file. We'll look at our `lemursByNameState` first:
+
+```
+const lemursByNameState = selector({
+  key: 'lemursByNameState',
+  get: ({get}) => {
+        
+    const allLemurs = get(allLemursState)
+    const name = get(searchState)
+
+    const nameFilteredLemurs = allLemurs.filter(lemur => name === "" ? true : lemur.name.toLowerCase().includes(name.toLowerCase()))
+
+    return nameFilteredLemurs
+  }
+})
+```
+
+First, let's look at how we're using that `get` function. In order to connect our derived state to other pieces of state, we'll need to use the `get` function provided by recoil. Basically, we invoke the `get` function, pass in the piece of state we want our derived state to connect to, and assign it to a variable, which we can then use throughout the rest of our function. 
+
+In order to pass a piece of state to the `get` function, it must be declared within the same file or imported into that file. For that reason, we're importing our `searchState` at the top of this file:
+
+```
+import { searchState } from './searchState'
+```
+
+Then, once we've used the `get` function to capture these pieces of state and save them in variables, we can use them to generate the value of our derived state, which is specified by the return statement of our function. (In this example, that would be `nameFilteredLemurs`.)
+
+### Deriving State from Derived State
+
+Derived state doesn't have to depend only on state declared using an atom - it can derive its value from other pieces of derived state. Let's take a look at the next piece of derived state we're declaring in our `allLemursState.js` file, `lemursByNameAndCatState`.
