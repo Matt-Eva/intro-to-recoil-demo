@@ -10,7 +10,7 @@ But, first and foremost, what is a 'state management library'?
 
 If you've built any React apps of moderate size, you've probably experienced the frustration of `props-drilling`. Let's say you need to declare state in a certain parent component, but a component five or even ten steps down the component hierarchy needs to access and possibly even update this state. Hence, you have to pass your stateful variable and your callback function to update state as props all the way from the top component to the lower component. This is known as `props-drilling`, and can cause frustrating errors - (oops, I misspelled the prop name when I destructured it in this component) - which become more common and harder to track down as your app grows.
 
-Which is where a state management library comes in. Using a state management library allows us to store the state of our application in a separate file and selectively import that state wherever it's needed. While this initially requires more work and setup (and also requires us to keep track of more files) it ultimately becomes an invaluable organizational tool that keeps your components clean and legible and reduces the chance for typos and unpassed props. There are more benefits that can be gained from use a state management libary, but the benefits listed above are often merit enough, and will start to have more and more of an impact as your application grows.
+Which is where a state management library comes in. Using a state management library allows us to store the state of our application in a separate file and selectively import that state wherever it's needed. While this initially requires more work and setup (and also requires us to keep track of more files) it ultimately becomes an invaluable organizational tool that keeps your components clean and legible and reduces the chance for typos and unpassed props. There are more benefits that can be gained from using a state management libary, but the benefits listed above are often merit enough, and will start to have more and more of an impact as your application grows.
 
 ## Installing Recoil
 
@@ -24,7 +24,7 @@ If you haven't already done so, fork, clone, and `npm install` this repository t
 
 Note: the frontend is set up to connect to the backend via `localhost:3000`. Be sure to run your backend "server" on this port.
 
-Now, let's take a look at our `index.js` file in this application. In addition to install Recoil as a dependency, we're goint to need to do some basic setup within `index.js` so that we can use Recoil throughout our application.
+Now, let's take a look at our `index.js` file in this application. In addition to installing Recoil as a dependency, we're goint to need to do some basic setup within `index.js` so that we can use Recoil throughout our application.
 
 If you look at the import statements in `index.js`, you'll notice that we're importing something called `RecoilRoot` from Recoil: 
 
@@ -45,7 +45,7 @@ root.render(
 )
 ```
 
-Your app may also start out with React.StrictMode included, which you can keep throughout the development process. It's not necessary to run Recoil, but it won't impact Recoil functionality if you do keep it in.
+Your app may also start out with React.StrictMode included, which you can keep throughout the development process. It's not necessary to run Recoil, but it won't impact Recoil functionality if you do keep it in. However, it may cause duplicate updates to state, so if you're noticing duplicate updates while developing, this is likely the source of that phenomenon.
 
 ## Recoil Basics 
 
@@ -55,7 +55,7 @@ The two key Recoil concepts we'll be discussing in this reading are `atoms` and 
 
 Atoms are the most basic aspect of Recoil - if you wanted to, you could get by with only using atoms.
 
-We set up a new `atom` for a new piece of state. The first step to creating an atom and its corresponding state involves creating a file to store the atom in. I like to keep these types of files that store state in a separate folder called `state`, which is at the same level in our folder hiearchy as our `components` folder. In this example app, we have three files in our `state` folder - `allLemursState.js`, `categoryState.js`, and `searchState.js`. You can group related state files in their own folder within the `state` folder as well, which might be helpful if your application is using a lot of state (and therefore a lot of state files). However, I wouldn't recommend implementing folder nesting any deeper than this.
+We set up a new `atom` for a new piece of state. The first step to creating an atom and its corresponding state involves creating a file to store the atom in. One way to organize your file structure involves keeping files that store state in a separate folder called `state`, which is at the same level in our folder hiearchy as our `components` folder. In this example app, we have three files in our `state` folder - `allLemursState.js`, `categoryState.js`, and `searchState.js`. You can group related state files in their own folder within the `state` folder as well, which might be helpful if your application is using a lot of state (and therefore a lot of state files). However, it's probably best not to implement folder nesting any deeper than this.
 
 To create a new atom within your new file (let's say our new file is named newState.js), you first need to import your atom from recoil:
 
@@ -149,7 +149,7 @@ The purpose of this hook will become clear when we talk about the next fundament
 
 ## Selectors
 
-Selectors are like atoms in that they are also used to create state, but they have a significant difference. Selectors are used only to represent DERIVED state - that is, state whose value is dependent on other state. Derived state is never changed using a setState function - rather, whenever a piece of state that it depends upon changes, derived state's value will also change. Because we never call a setState function for a piece of derived state, we'll want to access derived state using the `useRecoilValue` hook, since that only returns the state value without a corresponding setter function.
+Selectors - like atoms - are also used to create state, but they have a significant difference. Selectors are used only to represent DERIVED state - that is, state whose value is dependent on other pieces state. Derived state is never changed using a setState function - rather, whenever a piece of state that it depends upon changes, derived state's value will also change. Because we never call a setState function for a piece of derived state, we'll want to access derived state using the `useRecoilValue` hook, since that only returns the state value without a corresponding setter function.
 
 Let's look at an example of derived state, and talk about selector syntax. Go ahead and open up the file `allLemursState.js` and view it in your text editor. Open up the files `categoryState.js` and `searchState.js` as well, since we'll be using state defined in those files here in `allLemursState.js`.
 
@@ -339,7 +339,7 @@ function LemurContainer() {
 export default LemurContainer
 ```
 
-Once we've included this piece of state in our LemurContainer, we can map over it to generate the appropriate number of lemurs cards to display.
+Once we've included this piece of state in our LemurContainer, we can map over it to generate the appropriate number of lemur cards to display.
 
 ## Conclusion
 
