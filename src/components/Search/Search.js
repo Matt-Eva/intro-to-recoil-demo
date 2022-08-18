@@ -11,7 +11,8 @@ function Search() {
   }
 
   return (
-    <div>
+    <div className='search'>
+      <label>Search by name:</label>
       <input type='text' value={search} onChange={handleChange} />
     </div>
   )
