@@ -53,7 +53,7 @@ The two key Recoil concepts we'll be discussing in this reading are `atoms` and 
 
 ## Atoms
 
-Atoms are the most basic aspect of Recoil - if you wanted to, you could get by with only using atoms.
+Atoms are the most basic aspect of Recoil - depending on how complex your state needs are, you could get by with only using atoms.
 
 We set up a new `atom` for a new piece of state. The first step to creating an atom and its corresponding state involves creating a file to store the atom in. One way to organize your file structure involves keeping files that store state in a separate folder called `state`, which is at the same level in our folder hiearchy as our `components` folder. In this example app, we have three files in our `state` folder - `allLemursState.js`, `categoryState.js`, and `searchState.js`. You can group related state files in their own folder within the `state` folder as well, which might be helpful if your application is using a lot of state (and therefore a lot of state files). However, it's probably best not to implement folder nesting any deeper than this.
 
