@@ -1,6 +1,6 @@
 import {atom, selector} from 'recoil'
-import { categoryState } from './categoryState'
-import { searchState } from './searchState'
+import { categoryState } from './CategoryState'
+import { searchState } from './SearchState'
 
 const allLemursState = atom({
     key: 'allLemursState', // unique identifier for state 

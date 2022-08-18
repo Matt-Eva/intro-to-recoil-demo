@@ -1,5 +1,5 @@
 import React from 'react'
-import {categoryState} from '../../state/categoryState'
+import {categoryState} from '../../state/CategoryState'
 import {useRecoilState} from 'recoil'
 
 function CategorySelect() {

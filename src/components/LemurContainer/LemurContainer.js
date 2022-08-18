@@ -1,7 +1,7 @@
 import React from 'react'
 import LemurCard from "../LemurCard/LemurCard"
 
-import { lemursByNameAndCatState } from '../../state/allLemursState'
+import { lemursByNameAndCatState } from '../../state/AllLemursState'
 
 import { useRecoilValue } from 'recoil'
 

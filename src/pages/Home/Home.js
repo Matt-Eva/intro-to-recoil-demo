@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react'
 
 import { useRecoilState } from 'recoil'
 
-import { allLemursState } from "../../state/allLemursState"
+import { allLemursState } from "../../state/AllLemursState"
 
 import LemurContainer from '../../components/LemurContainer/LemurContainer'
 import Search from '../../components/Search/Search'
