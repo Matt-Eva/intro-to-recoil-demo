@@ -1,6 +1,8 @@
 import {atom} from 'recoil'
 
-export const categoryState = atom({
+const categoryState = atom({
     key: 'categoryState',
     default: 'All'
 })
+
+export {categoryState}

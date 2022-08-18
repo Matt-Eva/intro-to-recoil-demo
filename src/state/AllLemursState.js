@@ -1,38 +1,35 @@
 import {atom, selector} from 'recoil'
-import { categoryState } from './CategoryState'
-import { searchState } from './SearchState'
+import { categoryState } from './categoryState'
+import { searchState } from './searchState'
 
-export const allLemursState = atom({
-    key: 'allLemursState',
-    default: []
+const allLemursState = atom({
+    key: 'allLemursState', // unique identifier for state 
+    default: [] // initial value of state
 })
 
 const lemursByNameState = selector({
     key: 'lemursByNameState',
-    get: ({get}) =>{
+    get: ({get}) => {
+        
         const allLemurs = get(allLemursState)
         const name = get(searchState)
-        return allLemurs.filter(lemur => {
-            if(name === ''){
-                return true
-            } else {
-                return lemur.name.toLowerCase().includes(name.toLowerCase())
-            }  
-        })
+
+        const nameFilteredLemurs = allLemurs.filter(lemur => name === "" ? true: lemur.name.toLowerCase().includes(name.toLowerCase()))
+
+        return nameFilteredLemurs
     }
 })
 
-export const lemursByNameAndCatState = selector({
+const lemursByNameAndCatState = selector({
     key: 'lemursByNameAndCatState',
     get: ({get}) =>{
+
         const lemursByName = get(lemursByNameState)
         const category = get(categoryState)
-        return lemursByName.filter(lemur => {
-            if(category === 'All'){
-                return true
-            } else {
-                return lemur.sex === category
-            }
-        })
+
+        return lemursByName.filter(lemur => category === 'All' ? true : lemur.sex === category)
     }
+
 })
+
+export {allLemursState, lemursByNameAndCatState}
