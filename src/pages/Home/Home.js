@@ -12,10 +12,8 @@ import "./Home.css"
 function Home() {
   const [allLemurs, setAllLemurs] = useRecoilState(allLemursState)
   
-
-
   useEffect(() =>{
-    fetch('http://localhost:3000/lemurs')
+    fetch('http://localhost:3001/lemurs')
     .then(r => r.json())
     .then(data => {
       setAllLemurs(data)
@@ -23,7 +21,8 @@ function Home() {
   }, [])
 
   return (
-    <div>
+    <div className='home'>
+      <h1 className="home__title">Zookeeper App: Lemur Manager</h1>
       <div className='home__header'>
         <Search />
         <CategorySelect />
