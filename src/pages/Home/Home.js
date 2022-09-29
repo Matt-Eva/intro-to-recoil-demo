@@ -16,6 +16,7 @@ function Home() {
     fetch('http://localhost:3001/lemurs')
     .then(r => r.json())
     .then(data => {
+      console.log(data)
       setAllLemurs(data)
     })
   }, [])

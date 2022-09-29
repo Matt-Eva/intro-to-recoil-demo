@@ -7,7 +7,7 @@ function CategorySelect() {
 
   return (
     <div>
-        <label>Filter By Sex:</label>
+        <label>Filter By Age:</label>
         <select value={category} onChange={(e)=>setCategory(e.target.value)}>
             <option value='All'>All</option>
             <option value='Old'>Old</option>
