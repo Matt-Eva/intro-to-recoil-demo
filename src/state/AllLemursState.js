@@ -27,10 +27,7 @@ const lemursByNameAndCatState = selector({
         const lemursByName = get(lemursByNameState)
         const category = get(categoryState)
 
-        return lemursByName.filter(lemur => {
-            console.log(lemur.age)
-           return category === 'All' ? true : lemur.age === category
-        })
+        return lemursByName.filter(lemur => category === 'All' ? true : lemur.age === category)
     }
 
 })
