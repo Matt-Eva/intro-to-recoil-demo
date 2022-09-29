@@ -7,12 +7,12 @@ function CategorySelect() {
 
   return (
     <div>
-        <label>Filter By Sex:</label>
+        <label>Filter By Age:</label>
         <select value={category} onChange={(e)=>setCategory(e.target.value)}>
             <option value='All'>All</option>
-            <option value='F'>Female</option>
-            <option value='M'>Male</option>
-            <option value='I'>Intersex</option>
+            <option value='Old'>Old</option>
+            <option value='Middle-Aged'>Middle-Aged</option>
+            <option value='Young'>Young</option>
         </select>
     </div>
   )
