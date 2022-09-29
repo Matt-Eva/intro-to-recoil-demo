@@ -27,7 +27,7 @@ const lemursByNameAndCatState = selector({
         const lemursByName = get(lemursByNameState)
         const category = get(categoryState)
 
-        return lemursByName.filter(lemur => category === 'All' ? true : lemur.sex === category)
+        return lemursByName.filter(lemur => category === 'All' ? true : lemur.age === category)
     }
 
 })
